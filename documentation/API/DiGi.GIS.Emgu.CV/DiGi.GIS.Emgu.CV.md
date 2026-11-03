@@ -52,6 +52,27 @@ public static class Create
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Create
 ### Methods
 
+<a name='DiGi.GIS.Emgu.CV.Create.Image(thisbyte[])'></a>
+
+## Create\.Image\(this byte\[\]\) Method
+
+Decodes an encoded image \(JPEG, PNG or any format OpenCV reads\) into a three\-channel 8\-bit BGR image; greyscale sources are expanded to three equal channels\.
+
+```csharp
+public static Image<Bgr,byte>? Image(this byte[]? bytes);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Create.Image(thisbyte[]).bytes'></a>
+
+`bytes` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
+
+The encoded image\.
+
+#### Returns
+[Emgu\.CV\.Image](https://learn.microsoft.com/en-us/dotnet/api/emgu.cv.image 'Emgu\.CV\.Image')  
+The decoded image, or null when the bytes are missing or cannot be decoded\.
+
 <a name='DiGi.GIS.Emgu.CV.Create.Mat(thisDiGi.GIS.Classes.OrtoData)'></a>
 
 ## Create\.Mat\(this OrtoData\) Method
@@ -159,6 +180,52 @@ The [DiGi\.Core\.Classes\.Range&lt;&gt;](https://learn.microsoft.com/en-us/dotne
 #### Returns
 [OrtoDatasComparison](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoDatasComparison 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoDatasComparison')  
 An [OrtoDatasComparison](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoDatasComparison 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoDatasComparison') object containing the comparison results, or [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null') if any input is null, the directory is empty, or no data is found\.
+
+<a name='DiGi.GIS.Emgu.CV.Create.OrtoObstacleFractions(thisbyte[])'></a>
+
+## Create\.OrtoObstacleFractions\(this byte\[\]\) Method
+
+Measures the shares of an encoded orthophoto tile \(JPEG or PNG, RGB or CIR\) hidden by cloud, haze, snow and deep shadow\.
+
+```csharp
+public static DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions? OrtoObstacleFractions(this byte[]? bytes);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Create.OrtoObstacleFractions(thisbyte[]).bytes'></a>
+
+`bytes` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
+
+The encoded image\.
+
+#### Returns
+[OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions')  
+The fractions, or null when the bytes are missing or cannot be decoded\.
+
+<a name='DiGi.GIS.Emgu.CV.Create.OrtoObstacleFractions(thisImage_Bgr,byte_)'></a>
+
+## Create\.OrtoObstacleFractions\(this Image\<Bgr,byte\>\) Method
+
+Measures the shares of an orthophoto tile \(RGB or CIR composite\) hidden by cloud, haze, snow and deep shadow, with the thresholds of [OrtoObstacleThreshold](DiGi.GIS.Emgu.CV.Constants.md#DiGi.GIS.Emgu.CV.Constants.OrtoObstacleThreshold 'DiGi\.GIS\.Emgu\.CV\.Constants\.OrtoObstacleThreshold')\.
+
+The tile is cut into blocks of [BlockSize](DiGi.GIS.Emgu.CV.Constants.md#DiGi.GIS.Emgu.CV.Constants.OrtoObstacleThreshold.BlockSize 'DiGi\.GIS\.Emgu\.CV\.Constants\.OrtoObstacleThreshold\.BlockSize') pixels (partial blocks at the edges included). A block that is bright, neutral and smooth is cloud; one that is neutral, smooth and of middle brightness is haze. In every other block each pixel is tested on its own: bright and neutral is snow, dark is shadow. A pixel therefore counts towards at most one obstacle.
+
+Smooth neutral surfaces (a large flat roof, a car park) can pass the haze rule and open water passes the shadow rule; the fractions are for relative ranking of samples.
+
+```csharp
+public static DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions? OrtoObstacleFractions(this Image<Bgr,byte>? image);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Create.OrtoObstacleFractions(thisImage_Bgr,byte_).image'></a>
+
+`image` [Emgu\.CV\.Image](https://learn.microsoft.com/en-us/dotnet/api/emgu.cv.image 'Emgu\.CV\.Image')
+
+The decoded image\.
+
+#### Returns
+[OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions')  
+The fractions, or null when the image is null or empty\.
 
 <a name='DiGi.GIS.Emgu.CV.Modify'></a>
 
@@ -281,6 +348,60 @@ public static class Query
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → Query
 ### Methods
 
+<a name='DiGi.GIS.Emgu.CV.Query.IsOrtoBlank(thisbyte[])'></a>
+
+## Query\.IsOrtoBlank\(this byte\[\]\) Method
+
+Checks whether an encoded orthophoto tile \(JPEG or PNG\) is of one uniform colour, within [Tolerance](DiGi.GIS.Emgu.CV.Constants.md#DiGi.GIS.Emgu.CV.Constants.OrtoBlank.Tolerance 'DiGi\.GIS\.Emgu\.CV\.Constants\.OrtoBlank\.Tolerance')\.
+
+This overload fits `Func<byte[], bool>`, so it can be passed as the `isBlank` argument of [DiGi\.GIS\.Query\.OrtoImageProbesAsync\(System\.Net\.Http\.HttpClient,DiGi\.Geometry\.Planar\.Classes\.BoundingBox2D,System\.String,System\.String,System\.Collections\.Generic\.IEnumerable\{System\.String\},System\.Int32,System\.Func\{System\.Byte\[\],System\.Boolean\},System\.Int32,System\.TimeSpan,System\.Double,System\.Threading\.CancellationToken\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.query.ortoimageprobesasync#digi-gis-query-ortoimageprobesasync(system-net-http-httpclient-digi-geometry-planar-classes-boundingbox2d-system-string-system-string-system-collections-generic-ienumerable{system-string}-system-int32-system-func{system-byte[]-system-boolean}-system-int32-system-timespan-system-double-system-threading-cancellationtoken) 'DiGi\.GIS\.Query\.OrtoImageProbesAsync\(System\.Net\.Http\.HttpClient,DiGi\.Geometry\.Planar\.Classes\.BoundingBox2D,System\.String,System\.String,System\.Collections\.Generic\.IEnumerable\{System\.String\},System\.Int32,System\.Func\{System\.Byte\[\],System\.Boolean\},System\.Int32,System\.TimeSpan,System\.Double,System\.Threading\.CancellationToken\)').
+
+```csharp
+public static bool IsOrtoBlank(this byte[]? bytes);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Query.IsOrtoBlank(thisbyte[]).bytes'></a>
+
+`bytes` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
+
+The encoded image\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+True when the tile is uniform; false when it has content, or when the bytes are missing or cannot be decoded\.
+
+<a name='DiGi.GIS.Emgu.CV.Query.IsOrtoBlank(thisbyte[],int)'></a>
+
+## Query\.IsOrtoBlank\(this byte\[\], int\) Method
+
+Checks whether an encoded orthophoto tile \(JPEG or PNG\) is of one uniform colour\.
+
+The image is decoded to three channels and sampled on a grid of at most [SampleCount](DiGi.GIS.Emgu.CV.Constants.md#DiGi.GIS.Emgu.CV.Constants.OrtoBlank.SampleCount 'DiGi\.GIS\.Emgu\.CV\.Constants\.OrtoBlank\.SampleCount') positions per axis, always including the last row and column. The tile is uniform when, for every channel, the largest sampled value exceeds the smallest by no more than [tolerance](DiGi.GIS.Emgu.CV.md#DiGi.GIS.Emgu.CV.Query.IsOrtoBlank(thisbyte[],int).tolerance 'DiGi\.GIS\.Emgu\.CV\.Query\.IsOrtoBlank\(this byte\[\], int\)\.tolerance').
+
+An undecodable payload is not blank: [DiGi\.GIS\.Query\.OrtoImageProbesAsync\(System\.Net\.Http\.HttpClient,DiGi\.Geometry\.Planar\.Classes\.BoundingBox2D,System\.String,System\.String,System\.Collections\.Generic\.IEnumerable\{System\.String\},System\.Int32,System\.Func\{System\.Byte\[\],System\.Boolean\},System\.Int32,System\.TimeSpan,System\.Double,System\.Threading\.CancellationToken\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.query.ortoimageprobesasync#digi-gis-query-ortoimageprobesasync(system-net-http-httpclient-digi-geometry-planar-classes-boundingbox2d-system-string-system-string-system-collections-generic-ienumerable{system-string}-system-int32-system-func{system-byte[]-system-boolean}-system-int32-system-timespan-system-double-system-threading-cancellationtoken) 'DiGi\.GIS\.Query\.OrtoImageProbesAsync\(System\.Net\.Http\.HttpClient,DiGi\.Geometry\.Planar\.Classes\.BoundingBox2D,System\.String,System\.String,System\.Collections\.Generic\.IEnumerable\{System\.String\},System\.Int32,System\.Func\{System\.Byte\[\],System\.Boolean\},System\.Int32,System\.TimeSpan,System\.Double,System\.Threading\.CancellationToken\)') tells exceptions apart before it asks this question.
+
+```csharp
+public static bool IsOrtoBlank(this byte[]? bytes, int tolerance);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Query.IsOrtoBlank(thisbyte[],int).bytes'></a>
+
+`bytes` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
+
+The encoded image\.
+
+<a name='DiGi.GIS.Emgu.CV.Query.IsOrtoBlank(thisbyte[],int).tolerance'></a>
+
+`tolerance` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
+
+The largest per\-channel spread, on 0–255, that still counts as uniform\.
+
+#### Returns
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
+True when the tile is uniform; false when it has content, or when the bytes are missing or cannot be decoded\.
+
 <a name='DiGi.GIS.Emgu.CV.Query.OrtoDatasComparisonDictionary(string,System.Collections.Generic.IEnumerable_DiGi.GIS.Classes.Building2D_)'></a>
 
 ## Query\.OrtoDatasComparisonDictionary\(string, IEnumerable\<Building2D\>\) Method
@@ -369,3 +490,26 @@ The second date time used for the comparison\.
 #### Returns
 [System\.Collections\.Generic\.Dictionary&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')[OrtoImageComparison](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoImageComparison 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoImageComparison')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2 'System\.Collections\.Generic\.Dictionary\`2')  
 A dictionary where keys are group names and values are the corresponding [OrtoImageComparison](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoImageComparison 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoImageComparison') objects, or `null` if [ortoDatasComparison](DiGi.GIS.Emgu.CV.md#DiGi.GIS.Emgu.CV.Query.OrtoImageComparisonDictionary(thisDiGi.GIS.Emgu.CV.Classes.OrtoDatasComparison,System.DateTime,System.DateTime).ortoDatasComparison 'DiGi\.GIS\.Emgu\.CV\.Query\.OrtoImageComparisonDictionary\(this DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoDatasComparison, System\.DateTime, System\.DateTime\)\.ortoDatasComparison') is null\.
+
+<a name='DiGi.GIS.Emgu.CV.Query.OrtoObstacles(thisDiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions)'></a>
+
+## Query\.OrtoObstacles\(this OrtoObstacleFractions\) Method
+
+Gets the obstacles measured on a probed orthophoto tile: each of [DiGi\.GIS\.Enums\.OrtoObstacle\.Shadow](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.ortoobstacle.shadow 'DiGi\.GIS\.Enums\.OrtoObstacle\.Shadow'), [DiGi\.GIS\.Enums\.OrtoObstacle\.Snow](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.ortoobstacle.snow 'DiGi\.GIS\.Enums\.OrtoObstacle\.Snow'), [DiGi\.GIS\.Enums\.OrtoObstacle\.Haze](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.ortoobstacle.haze 'DiGi\.GIS\.Enums\.OrtoObstacle\.Haze') and [DiGi\.GIS\.Enums\.OrtoObstacle\.Cloud](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.ortoobstacle.cloud 'DiGi\.GIS\.Enums\.OrtoObstacle\.Cloud') whose fraction reaches its threshold in [OrtoObstacleThreshold](DiGi.GIS.Emgu.CV.Constants.md#DiGi.GIS.Emgu.CV.Constants.OrtoObstacleThreshold 'DiGi\.GIS\.Emgu\.CV\.Constants\.OrtoObstacleThreshold')\.
+
+The result is the `measuredOrtoObstacle` argument of [DiGi\.GIS\.Query\.OrtoObstacles\(DiGi\.GIS\.Classes\.OrtoSheet,System\.Nullable\{DiGi\.GIS\.Enums\.OrtoObstacle\}\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.query.ortoobstacles#digi-gis-query-ortoobstacles(digi-gis-classes-ortosheet-system-nullable{digi-gis-enums-ortoobstacle}) 'DiGi\.GIS\.Query\.OrtoObstacles\(DiGi\.GIS\.Classes\.OrtoSheet,System\.Nullable\{DiGi\.GIS\.Enums\.OrtoObstacle\}\)'); null passes on as "not probed".
+
+```csharp
+public static System.Nullable<DiGi.GIS.Enums.OrtoObstacle> OrtoObstacles(this DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions? ortoObstacleFractions);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Query.OrtoObstacles(thisDiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions).ortoObstacleFractions'></a>
+
+`ortoObstacleFractions` [OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions')
+
+The fractions measured on the tile\.
+
+#### Returns
+[System\.Nullable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')[DiGi\.GIS\.Enums\.OrtoObstacle](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.ortoobstacle 'DiGi\.GIS\.Enums\.OrtoObstacle')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1 'System\.Nullable\`1')  
+The measured obstacles \([DiGi\.GIS\.Enums\.OrtoObstacle\.None](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.enums.ortoobstacle.none 'DiGi\.GIS\.Enums\.OrtoObstacle\.None') when no fraction reaches its threshold\), or null when [ortoObstacleFractions](DiGi.GIS.Emgu.CV.md#DiGi.GIS.Emgu.CV.Query.OrtoObstacles(thisDiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions).ortoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Query\.OrtoObstacles\(this DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions\)\.ortoObstacleFractions') is null\.

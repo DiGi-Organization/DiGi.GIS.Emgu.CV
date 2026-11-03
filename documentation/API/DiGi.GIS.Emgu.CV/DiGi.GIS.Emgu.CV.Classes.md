@@ -864,3 +864,157 @@ The target date and time to search for\.
 #### Returns
 [OrtoImageComparison](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoImageComparison 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoImageComparison')  
 The matching [OrtoImageComparison](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoImageComparison 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoImageComparison'), or [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null') if no suitable comparison exists\.
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions'></a>
+
+## OrtoObstacleFractions Class
+
+The shares of an orthophoto tile hidden by shadow, snow, haze and cloud, each on \[0, 1\]\.
+
+Every pixel is assigned to at most one obstacle, so the four fractions add up to [Total](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.Total 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions\.Total'), which is the `obstacleFraction` argument of [DiGi\.GIS\.Query\.OrtoSheetUsability\(DiGi\.GIS\.Classes\.OrtoSheet,System\.Nullable\{System\.Double\}\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.query.ortosheetusability#digi-gis-query-ortosheetusability(digi-gis-classes-ortosheet-system-nullable{system-double}) 'DiGi\.GIS\.Query\.OrtoSheetUsability\(DiGi\.GIS\.Classes\.OrtoSheet,System\.Nullable\{System\.Double\}\)'). [OrtoObstacles\(this OrtoObstacleFractions\)](DiGi.GIS.Emgu.CV.md#DiGi.GIS.Emgu.CV.Query.OrtoObstacles(thisDiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions) 'DiGi\.GIS\.Emgu\.CV\.Query\.OrtoObstacles\(this DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions\)') turns the fractions into the measured obstacles of [DiGi\.GIS\.Query\.OrtoObstacles\(DiGi\.GIS\.Classes\.OrtoSheet,System\.Nullable\{DiGi\.GIS\.Enums\.OrtoObstacle\}\)](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.query.ortoobstacles#digi-gis-query-ortoobstacles(digi-gis-classes-ortosheet-system-nullable{digi-gis-enums-ortoobstacle}) 'DiGi\.GIS\.Query\.OrtoObstacles\(DiGi\.GIS\.Classes\.OrtoSheet,System\.Nullable\{DiGi\.GIS\.Enums\.OrtoObstacle\}\)').
+
+Build one from an image with [OrtoObstacleFractions\(this byte\[\]\)](DiGi.GIS.Emgu.CV.md#DiGi.GIS.Emgu.CV.Create.OrtoObstacleFractions(thisbyte[]) 'DiGi\.GIS\.Emgu\.CV\.Create\.OrtoObstacleFractions\(this byte\[\]\)').
+
+```csharp
+public class OrtoObstacleFractions : DiGi.Core.Classes.SerializableObject, DiGi.GIS.Interfaces.IGISSerializableObject, DiGi.GIS.Interfaces.IGISObject, DiGi.Core.Interfaces.IObject, DiGi.Core.Interfaces.ISerializableObject, DiGi.Core.Interfaces.ICloneableObject<DiGi.Core.Interfaces.ISerializableObject>, DiGi.Core.Interfaces.ICloneableObject
+```
+
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [DiGi\.Core\.Classes\.Object](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.object 'DiGi\.Core\.Classes\.Object') → [DiGi\.Core\.Classes\.SerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.classes.serializableobject 'DiGi\.Core\.Classes\.SerializableObject') → OrtoObstacleFractions
+
+Implements [DiGi\.GIS\.Interfaces\.IGISSerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisserializableobject 'DiGi\.GIS\.Interfaces\.IGISSerializableObject'), [DiGi\.GIS\.Interfaces\.IGISObject](https://learn.microsoft.com/en-us/dotnet/api/digi.gis.interfaces.igisobject 'DiGi\.GIS\.Interfaces\.IGISObject'), [DiGi\.Core\.Interfaces\.IObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iobject 'DiGi\.Core\.Interfaces\.IObject'), [DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject'), [DiGi\.Core\.Interfaces\.ICloneableObject&lt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1')[DiGi\.Core\.Interfaces\.ISerializableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.iserializableobject 'DiGi\.Core\.Interfaces\.ISerializableObject')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject-1 'DiGi\.Core\.Interfaces\.ICloneableObject\`1'), [DiGi\.Core\.Interfaces\.ICloneableObject](https://learn.microsoft.com/en-us/dotnet/api/digi.core.interfaces.icloneableobject 'DiGi\.Core\.Interfaces\.ICloneableObject')
+### Constructors
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions)'></a>
+
+## OrtoObstacleFractions\(OrtoObstacleFractions\) Constructor
+
+Initializes a new instance of the [OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions') class as a copy of another instance\.
+
+```csharp
+public OrtoObstacleFractions(DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions? ortoObstacleFractions);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions).ortoObstacleFractions'></a>
+
+`ortoObstacleFractions` [OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions')
+
+The instance to copy\.
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(double,double,double,double)'></a>
+
+## OrtoObstacleFractions\(double, double, double, double\) Constructor
+
+Initializes a new instance of the [OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions') class\.
+
+```csharp
+public OrtoObstacleFractions(double shadow, double snow, double haze, double cloud);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(double,double,double,double).shadow'></a>
+
+`shadow` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The share of the tile in deep shadow\.
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(double,double,double,double).snow'></a>
+
+`snow` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The share of the tile covered by snow\.
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(double,double,double,double).haze'></a>
+
+`haze` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The share of the tile veiled by haze or fog\.
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(double,double,double,double).cloud'></a>
+
+`cloud` [System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+The share of the tile covered by cloud\.
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(System.Text.Json.Nodes.JsonObject)'></a>
+
+## OrtoObstacleFractions\(JsonObject\) Constructor
+
+Initializes a new instance of the [OrtoObstacleFractions](DiGi.GIS.Emgu.CV.Classes.md#DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions 'DiGi\.GIS\.Emgu\.CV\.Classes\.OrtoObstacleFractions') class from its JSON representation\.
+
+```csharp
+public OrtoObstacleFractions(System.Text.Json.Nodes.JsonObject? jsonObject);
+```
+#### Parameters
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.OrtoObstacleFractions(System.Text.Json.Nodes.JsonObject).jsonObject'></a>
+
+`jsonObject` [System\.Text\.Json\.Nodes\.JsonObject](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.nodes.jsonobject 'System\.Text\.Json\.Nodes\.JsonObject')
+
+The JSON object\.
+### Properties
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.Cloud'></a>
+
+## OrtoObstacleFractions\.Cloud Property
+
+Gets the share of the tile covered by cloud\.
+
+```csharp
+public double Cloud { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.Haze'></a>
+
+## OrtoObstacleFractions\.Haze Property
+
+Gets the share of the tile veiled by haze or fog\.
+
+```csharp
+public double Haze { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.Shadow'></a>
+
+## OrtoObstacleFractions\.Shadow Property
+
+Gets the share of the tile in deep shadow\.
+
+```csharp
+public double Shadow { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.Snow'></a>
+
+## OrtoObstacleFractions\.Snow Property
+
+Gets the share of the tile covered by snow\.
+
+```csharp
+public double Snow { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
+
+<a name='DiGi.GIS.Emgu.CV.Classes.OrtoObstacleFractions.Total'></a>
+
+## OrtoObstacleFractions\.Total Property
+
+Gets the share of the tile hidden by any obstacle: the sum of the four fractions, which never overlap\.
+
+```csharp
+public double Total { get; }
+```
+
+#### Property Value
+[System\.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double 'System\.Double')
