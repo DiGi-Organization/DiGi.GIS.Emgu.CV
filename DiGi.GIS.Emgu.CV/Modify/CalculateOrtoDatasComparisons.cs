@@ -16,7 +16,7 @@ namespace DiGi.GIS.Emgu.CV
         /// <param name="building2Ds">The collection of 2D buildings to be compared with orthodata.</param>
         /// <param name="path">The destination file path where the comparison results will be stored.</param>
         /// <param name="ortoDatasComparisonOptions">Options to configure the comparison process, such as directory handling and whether to override existing data.</param>
-        /// <returns>An enumerable of <see cref="T:DiGi.Core.Classes.GuidReference" /> representing the buildings that were processed; returns null if inputs are invalid or no data was processed.</returns>
+        /// <returns>An enumerable of <see cref="DiGi.Core.Classes.GuidReference" /> representing the buildings that were processed; returns null if inputs are invalid or no data was processed.</returns>
         public static IEnumerable<GuidReference>? CalculateOrtoDatasComparisons(this IEnumerable<Building2D>? building2Ds, string? path, OrtoDatasComparisonOptions? ortoDatasComparisonOptions)
         {
             if (building2Ds == null || string.IsNullOrWhiteSpace(path))
@@ -67,7 +67,7 @@ namespace DiGi.GIS.Emgu.CV
                 }
             }
 
-            if (building2Ds_Temp == null || building2Ds_Temp.Count() == 0)
+            if (building2Ds_Temp == null || !building2Ds_Temp.Any())
             {
                 return null;
             }

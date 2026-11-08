@@ -4,6 +4,7 @@ using DiGi.GIS.Classes;
 using DiGi.GIS.Emgu.CV.Classes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace DiGi.GIS.Emgu.CV
 {
@@ -15,7 +16,7 @@ namespace DiGi.GIS.Emgu.CV
         /// <param name="table">The <see cref="Table" /> instance where the processed data rows will be added.</param>
         /// <param name="ortoDatasComparisons">A collection of <see cref="OrtoDatasComparison" /> objects containing the image comparison data to process.</param>
         /// <param name="yearBuiltDatas">An optional collection of <see cref="YearBuiltData" /> objects used to associate building years with the references.</param>
-        /// <returns>A <see cref="T:System.Boolean" /> value indicating whether the data was successfully added to the table; returns <c>false</c> if the table or comparisons collection is null.</returns>
+        /// <returns>A <see cref="System.Boolean" /> value indicating whether the data was successfully added to the table; returns <c>false</c> if the table or comparisons collection is null.</returns>
         public static bool AddRange(this Table? table, IEnumerable<OrtoDatasComparison>? ortoDatasComparisons, IEnumerable<YearBuiltData>? yearBuiltDatas = null)
         {
             if (ortoDatasComparisons == null || table == null)
@@ -92,21 +93,21 @@ namespace DiGi.GIS.Emgu.CV
                                 continue;
                             }
 
-                            string prefix = string.Format("{0}_{1}", name, j);
+                            string prefix = string.Format(CultureInfo.CurrentCulture, "{0}_{1}", name, j);
 
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.AverageColorSimilarity))] = double.IsNaN(ortoImageComparison.AverageColorSimilarity) ? 0 : ortoImageComparison.AverageColorSimilarity;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.ColorDistributionShift))] = double.IsNaN(ortoImageComparison.ColorDistributionShift) ? 0 : ortoImageComparison.ColorDistributionShift;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.GrayHistogramFactor))] = double.IsNaN(ortoImageComparison.GrayHistogramFactor) ? 0 : ortoImageComparison.GrayHistogramFactor;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.HammingDistance))] = ortoImageComparison.HammingDistance;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.HistogramCorrelation))] = double.IsNaN(ortoImageComparison.HistogramCorrelation) ? 0 : ortoImageComparison.HistogramCorrelation;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.ShapeComparisonFactor))] = double.IsNaN(ortoImageComparison.ShapeComparisonFactor) ? 0 : ortoImageComparison.ShapeComparisonFactor;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.StructuralSimilarityIndex_AbsoluteDifference))] = double.IsNaN(ortoImageComparison.StructuralSimilarityIndex_AbsoluteDifference) ? 0 : ortoImageComparison.StructuralSimilarityIndex_AbsoluteDifference;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.StructuralSimilarityIndex_MatchTemplate))] = double.IsNaN(ortoImageComparison.StructuralSimilarityIndex_MatchTemplate) ? 0 : ortoImageComparison.StructuralSimilarityIndex_MatchTemplate;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.AverageColorSimilarity))] = double.IsNaN(ortoImageComparison.AverageColorSimilarity) ? 0 : ortoImageComparison.AverageColorSimilarity;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.ColorDistributionShift))] = double.IsNaN(ortoImageComparison.ColorDistributionShift) ? 0 : ortoImageComparison.ColorDistributionShift;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.GrayHistogramFactor))] = double.IsNaN(ortoImageComparison.GrayHistogramFactor) ? 0 : ortoImageComparison.GrayHistogramFactor;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.HammingDistance))] = ortoImageComparison.HammingDistance;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.HistogramCorrelation))] = double.IsNaN(ortoImageComparison.HistogramCorrelation) ? 0 : ortoImageComparison.HistogramCorrelation;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.ShapeComparisonFactor))] = double.IsNaN(ortoImageComparison.ShapeComparisonFactor) ? 0 : ortoImageComparison.ShapeComparisonFactor;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.StructuralSimilarityIndex_AbsoluteDifference))] = double.IsNaN(ortoImageComparison.StructuralSimilarityIndex_AbsoluteDifference) ? 0 : ortoImageComparison.StructuralSimilarityIndex_AbsoluteDifference;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.StructuralSimilarityIndex_MatchTemplate))] = double.IsNaN(ortoImageComparison.StructuralSimilarityIndex_MatchTemplate) ? 0 : ortoImageComparison.StructuralSimilarityIndex_MatchTemplate;
 
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.MeanLaplacianFactor))] = double.IsNaN(ortoImageComparison.MeanLaplacianFactor) ? 0 : ortoImageComparison.MeanLaplacianFactor;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.StandardDeviationLaplacianFactor))] = double.IsNaN(ortoImageComparison.StandardDeviationLaplacianFactor) ? 0 : ortoImageComparison.StandardDeviationLaplacianFactor;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.OpticalFlowAverageMagnitude))] = double.IsNaN(ortoImageComparison.OpticalFlowAverageMagnitude) ? 0 : ortoImageComparison.OpticalFlowAverageMagnitude;
-                            dictionary[string.Format("{0}_{1}", prefix, nameof(ortoImageComparison.ORBFeatureMatchingFactor))] = double.IsNaN(ortoImageComparison.ORBFeatureMatchingFactor) ? 0 : ortoImageComparison.ORBFeatureMatchingFactor;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.MeanLaplacianFactor))] = double.IsNaN(ortoImageComparison.MeanLaplacianFactor) ? 0 : ortoImageComparison.MeanLaplacianFactor;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.StandardDeviationLaplacianFactor))] = double.IsNaN(ortoImageComparison.StandardDeviationLaplacianFactor) ? 0 : ortoImageComparison.StandardDeviationLaplacianFactor;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.OpticalFlowAverageMagnitude))] = double.IsNaN(ortoImageComparison.OpticalFlowAverageMagnitude) ? 0 : ortoImageComparison.OpticalFlowAverageMagnitude;
+                            dictionary[string.Format(CultureInfo.CurrentCulture, "{0}_{1}", prefix, nameof(ortoImageComparison.ORBFeatureMatchingFactor))] = double.IsNaN(ortoImageComparison.ORBFeatureMatchingFactor) ? 0 : ortoImageComparison.ORBFeatureMatchingFactor;
                         }
                     }
 

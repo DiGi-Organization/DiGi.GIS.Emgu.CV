@@ -2,6 +2,7 @@
 using DiGi.GIS.Classes;
 using DiGi.GIS.Emgu.CV.Classes;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace DiGi.GIS.Emgu.CV
@@ -40,7 +41,7 @@ namespace DiGi.GIS.Emgu.CV
                 return result;
             }
 
-            string[] paths = System.IO.Directory.GetFiles(directory, string.Format("*.{0}", Constants.FileExtension.OrtoDatasComparisonFile));
+            string[] paths = System.IO.Directory.GetFiles(directory, string.Format(CultureInfo.CurrentCulture, "*.{0}", Constants.FileExtension.OrtoDatasComparisonFile));
             if (paths == null || paths.Length == 0)
             {
                 return result;
